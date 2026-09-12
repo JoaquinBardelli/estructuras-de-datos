@@ -1,3 +1,8 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+
 int factorialRecursivo(int n) {
     if (n <= 1) {           // cubre n=0 y n=1, ambos casos dan 1
         return 1;
@@ -37,4 +42,43 @@ int sumaDigitos(int n){
     if (n < 10) return n;
     int numero = n % 10;
     return numero + sumaDigitos((n-numero)/10);
+}
+
+//Tests de las funciones
+void testFunciones() {
+    // tests de factorial
+    assert(factorialRecursivo(0) == 1);
+    assert(factorialRecursivo(1) == 1);
+    assert(factorialRecursivo(5) == 120);
+    assert(factorialRecursivo(6) == 720);
+
+    assert(factorialIterativo(0) == 1);
+    assert(factorialIterativo(1) == 1);
+    assert(factorialIterativo(5) == 120);
+    assert(factorialIterativo(6) == 720);
+
+    // tests de fibonacci
+    assert(fibonacciRecursivo(0) == 0);
+    assert(fibonacciRecursivo(1) == 1);
+    assert(fibonacciRecursivo(6) == 8);
+    assert(fibonacciRecursivo(10) == 55);
+
+    assert(fibonacciIterativo(0) == 0);
+    assert(fibonacciIterativo(1) == 1);
+    assert(fibonacciIterativo(6) == 8);
+    assert(fibonacciIterativo(10) == 55);
+
+    // tests de suma de dígitos
+    assert(sumaDigitos(5) == 5);
+    assert(sumaDigitos(9) == 9);
+    assert(sumaDigitos(123) == 6);
+    assert(sumaDigitos(999) == 27);
+    assert(sumaDigitos(1000) == 1);
+
+    cout << "Todos los tests pasaron correctamente." << endl;
+}
+
+int main() {
+    testFunciones();
+    return 0;
 }
