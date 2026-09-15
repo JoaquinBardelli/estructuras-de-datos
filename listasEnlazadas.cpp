@@ -174,7 +174,7 @@ void testFunciones() {
 int main(){
     testFunciones();
 
-    Nodo* head = nullptr;  // lista vacia al principio
+    Nodo* head = nullptr;  
 
     // Insertamos algunos valores al inicio
     head = insertarInicio(30, head);
@@ -182,7 +182,7 @@ int main(){
     head = insertarInicio(20, head);
     head = insertarInicio(10, head);
 
-    imprimirLista(head);  // esperado: 10 -> 20 -> 30
+    imprimirLista(head);  
 
     // Probamos buscar
     buscar(20, head);   // deberia encontrarlo
