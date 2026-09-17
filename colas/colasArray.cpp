@@ -29,16 +29,31 @@ struct Cola{
     void peek(){
         cout << "El elemento en el frente de la cola es: " << elementos[front] << endl;
     }
+
+    int size(){
+        return (rear-front);
+    }
+
+    bool isEmpty(){
+        return (rear-front) == 0;
+    }
+
+    bool isFull(){
+        return rear == capacidad;
+    }
 };
 
 int main(){
     Cola cola;
+    cout << cola.isEmpty() << endl;
     cola.enqueue(5);
-    cola.peek();
     cola.enqueue(6);
     cola.enqueue(7);
-    cola.enqueue(8);
+    cola.peek();
+    cout << cola.size() << endl;
     cola.dequeue();
     cola.peek();
+    cout << cola.isFull() << endl;
+    cout << cola.isEmpty() << endl;
     return 0;
 }
