@@ -1,9 +1,20 @@
 #include <iostream>
 using namespace std;
-//Crear primero struct NodoArbol
-//Despues crear struct Cola
-//En dequeue de Cola devolver de tipo NodoArbol*
+
+//Crear primero struct NodoArbol HECHO
+//Despues crear struct Cola HECHO
+//En dequeue de Cola devolver de tipo NodoArbol* HECHO
 //Armar la funcion insertar y mostrarArbol afuera de todo struct
+//
+
+
+struct NodoArbol {
+    int valor;
+    NodoArbol* izquierda;
+    NodoArbol* derecha;   
+};
+
+
 struct Cola{
     NodoArbol* front = nullptr;
     NodoArbol* rear = nullptr;
@@ -18,7 +29,7 @@ struct Cola{
         }
     }
 
-    void dequeue(){
+    NodoArbol* dequeue(){
         if(isEmpty()){
             cout << "No hay elementos en la cola para sacar" << endl;
             return;
@@ -28,7 +39,7 @@ struct Cola{
         if(front == nullptr){
             rear = nullptr;
         }
-        delete temporal;
+        return temporal;
     }
 
     void peek(){
@@ -58,12 +69,7 @@ struct Cola{
     }
 };
 
-struct NodoArbol {
-    int valor;
-    NodoArbol* izquierda;
-    NodoArbol* derecha;
-
-    void insertar(NodoArbol*& arbol ,NodoArbol* nodo){
+void insertar(NodoArbol*& arbol ,NodoArbol* nodo){
         if(arbol == nullptr){
             arbol = nodo;
         }else{
@@ -94,7 +100,6 @@ struct NodoArbol {
             mostrarArbol(raiz -> derecha);
         }
     }
-};
 
 
 
