@@ -14,7 +14,7 @@ struct Cola{
             elementos[rear] = valor;
             rear ++;
         }else{
-            cout << "No se pueda agregar mas valores, la pila esta llena" << endl;
+            cout << "No se pueda agregar mas valores, la cola esta llena" << endl;
         }
     }
 

@@ -21,8 +21,15 @@ struct Cola{
     }
 
     void dequeue(){
+        if(isEmpty()){
+            cout << "No hay elementos en la cola para sacar" << endl;
+            return;
+        }
         Nodo* temporal = front;
         front = front -> siguiente;
+        if(front == nullptr){
+            rear = nullptr;
+        }
         delete temporal;
     }
 
