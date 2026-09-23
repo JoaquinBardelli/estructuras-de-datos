@@ -15,113 +15,86 @@ struct NodoArbol {
 };
 
 
-struct Cola{
-    NodoArbol* front = nullptr;
-    NodoArbol* rear = nullptr;
+struct NodoCola {
+    NodoArbol* valor;
+    NodoCola* siguiente;
+};
 
-    void enqueue(NodoArbol*& nodo){
-        if(rear == nullptr && front == nullptr){
-            front = nodo;
-            rear = nodo;
+struct Cola {
+    NodoCola* front = nullptr;
+    NodoCola* rear = nullptr;
+
+    void enqueue(NodoArbol* dato){
+        NodoCola* nuevo = new NodoCola{dato, nullptr};
+        if(rear == nullptr){
+            front = rear = nuevo;
         }else{
-            rear = nodo;
+            rear->siguiente = nuevo;  
+            rear = nuevo;
         }
     }
 
     NodoArbol* dequeue(){
-        if(isEmpty()){
-            cout << "No hay elementos en la cola para sacar" << endl;
-            return;
-        }
-        NodoArbol* temporal = front;
-        front = front -> siguiente;
-        if(front == nullptr){
-            rear = nullptr;
-        }
-        return temporal;
+        if(front == nullptr) return nullptr;
+        NodoCola* temp = front;
+        NodoArbol* dato = front->valor;
+        front = front->siguiente;
+        if(front == nullptr) rear = nullptr;
+        delete temp;
+        return dato;
     }
 
-    void peek(){
-        cout << "El elemento en el frente de la cola es: " << front -> valor << endl;
-    }
-
-    void peekRear(){
-        cout << "El elemento en el final de la cola es: " << rear -> valor << endl;    
-    }
-
-    int size(){
-        NodoArbol* actual = front;
-        int cantidad = 0;
-        if (front == nullptr){
-            return 0;
-        }else{
-            while (actual != nullptr){
-                cantidad ++;
-                actual = actual -> siguiente;
-            }
-        }
-        return cantidad;
-    }
-
-    bool isEmpty(){
-        return front == nullptr;
-    }
+    bool isEmpty(){ return front == nullptr; }
 };
 
+void vaciarCola(Cola& cola){
+    while(!cola.isEmpty()){
+        cola.dequeue();
+    }
+}
+
 void insertar(NodoArbol*& arbol ,NodoArbol* nodo){
-        if(arbol == nullptr){
-            arbol = nodo;
-        }else{
-            Cola cola = new Cola{nullptr,nullptr};
-            cola.enqueue(arbol);
-            while(!cola.isEmpty){
-                actual = cola -> front
-                if(actual -> izquierda == nullptr){
-                    actual -> izquierda = nodo;
-                    return;
-                }else {
-                    cola.enqueue(cola -> izquierda);
-                }
-                if(actual -> derecha == nullptr){
-                    actual -> derecha = nodo;
-                    return;
-                }else {
-                    cola.enqueue(cola -> derecha);
-                }
+    if(arbol == nullptr){
+        arbol = nodo;
+    }else{
+        Cola cola;
+        cola.enqueue(arbol);
+        while(!cola.isEmpty()){
+            NodoArbol* actual = cola.dequeue();
+            if(actual -> izquierda == nullptr){
+                actual -> izquierda = nodo;
+                vaciarCola(cola);
+                return;
+            }else if (actual -> derecha == nullptr){
+                actual -> derecha = nodo;
+                vaciarCola(cola);
+                return;
+            }else{
+                cola.enqueue(actual -> izquierda);
+                cola.enqueue(actual -> derecha);
             }
         }
     }
+}
 
-    void mostrarArbol(NodoArbol* raiz){
-        if(raiz != nullptr){
-            cout << raiz -> valor << endl;
-            mostrarArbol(raiz -> izquierda);
-            mostrarArbol(raiz -> derecha);
-        }
+void mostrarArbol(NodoArbol* raiz){
+    if(raiz != nullptr){
+        cout << raiz -> valor << endl;
+        mostrarArbol(raiz -> izquierda);
+        mostrarArbol(raiz -> derecha);
     }
+}
 
 
-
-
-//hace el main completo para probar todo
 int main(){
-    
     NodoArbol* arbol = nullptr;
-
-    NodoArbol* nodo1 = new NodoArbol{1, nullptr, nullptr};
-    NodoArbol* nodo2 = new NodoArbol{2, nullptr, nullptr};
-    NodoArbol* nodo3 = new NodoArbol{3, nullptr, nullptr};
-    NodoArbol* nodo4 = new NodoArbol{4, nullptr, nullptr};
-    NodoArbol* nodo5 = new NodoArbol{5, nullptr, nullptr};
-
-    insertar(arbol, nodo1);
-    insertar(arbol, nodo2);
-    insertar(arbol, nodo3);
-    insertar(arbol, nodo4);
-    insertar(arbol, nodo5);
-
-    cout << "Mostrando el arbol:" << endl;
+    insertar(arbol, new NodoArbol{1, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{2, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{3, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{4, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{5, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{6, nullptr, nullptr});
+    insertar(arbol, new NodoArbol{7, nullptr, nullptr});
     mostrarArbol(arbol);
-
     return 0;
 }
