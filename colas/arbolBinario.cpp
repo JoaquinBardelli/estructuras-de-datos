@@ -24,7 +24,6 @@ struct Cola{
             front = nodo;
             rear = nodo;
         }else{
-            rear -> siguiente = nodo;
             rear = nodo;
         }
     }
@@ -104,20 +103,25 @@ void insertar(NodoArbol*& arbol ,NodoArbol* nodo){
 
 
 
+//hace el main completo para probar todo
 int main(){
-    NodoArbol raiz {1, nullptr, nullptr};
-    NodoArbol* punteroRaiz = &raiz; //puntero a la raíz del árbol, uso & para obtener la dirección de memoria de la raíz y asignarla al puntero.
-    NodoArbol* nodo1 = new NodoArbol{2, nullptr, nullptr};
-    NodoArbol* nodo2 = new NodoArbol{3, nullptr, nullptr};
-    NodoArbol* nodo3 = new NodoArbol{4, nullptr, nullptr};
-    NodoArbol* nodo4 = new NodoArbol{5, nullptr, nullptr};
+    
+    NodoArbol* arbol = nullptr;
 
-    punteroRaiz -> insertar(punteroRaiz, nodo1); //aca se usa raiz -> porque es un puntero a la estructura NodoArbol, y se necesita acceder a la función insertar() que está definida dentro de la estructura NodoArbol. Al usar el operador ->, se puede llamar a la función insertar() en el objeto apuntado por raiz. también se podría haber llamado a la función insertar() directamente desde el objeto nodo1, pero en este caso se está utilizando la raíz del árbol como punto de partida para insertar los nodos hijos.
-    punteroRaiz -> insertar(punteroRaiz, nodo2);
-    punteroRaiz -> insertar(punteroRaiz, nodo3);
-    punteroRaiz -> insertar(punteroRaiz, nodo4);
+    NodoArbol* nodo1 = new NodoArbol{1, nullptr, nullptr};
+    NodoArbol* nodo2 = new NodoArbol{2, nullptr, nullptr};
+    NodoArbol* nodo3 = new NodoArbol{3, nullptr, nullptr};
+    NodoArbol* nodo4 = new NodoArbol{4, nullptr, nullptr};
+    NodoArbol* nodo5 = new NodoArbol{5, nullptr, nullptr};
 
-    punteroRaiz -> mostrarArbol(punteroRaiz);
+    insertar(arbol, nodo1);
+    insertar(arbol, nodo2);
+    insertar(arbol, nodo3);
+    insertar(arbol, nodo4);
+    insertar(arbol, nodo5);
+
+    cout << "Mostrando el arbol:" << endl;
+    mostrarArbol(arbol);
 
     return 0;
 }
