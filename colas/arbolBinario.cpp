@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <cassert>
 using namespace std;
 
 //Crear primero struct NodoArbol HECHO
@@ -85,9 +87,52 @@ void mostrarArbol(NodoArbol* raiz){
     }
 }
 
+void preOrder(NodoArbol* raiz, vector<int>& resultado){
+    if(raiz != nullptr){
+        resultado.push_back(raiz -> valor);
+        preOrder(raiz -> izquierda, resultado);
+        preOrder(raiz -> derecha, resultado);
+    }
+}
+
+void inOrder(NodoArbol* raiz, vector<int>& resultado){
+    if(raiz != nullptr){
+        inOrder(raiz -> izquierda, resultado);
+        resultado.push_back(raiz -> valor);
+        inOrder(raiz -> derecha, resultado);
+    }
+}
+
+void postOrder(NodoArbol* raiz, vector<int>& resultado){
+    if(raiz != nullptr){
+        postOrder(raiz -> izquierda, resultado);
+        postOrder(raiz -> derecha, resultado);
+        resultado.push_back(raiz -> valor);
+    }
+}
+
+void testFunciones(NodoArbol*& arbol){
+    vector<int> resultado;
+    preOrder(arbol, resultado);
+    assert(resultado == vector<int>({1,2,4,5,3,6,7}));
+    resultado.clear();
+
+    inOrder(arbol, resultado);
+    assert(resultado == vector<int>({4, 2, 5, 1, 6, 3, 7}));
+    resultado.clear();
+
+    postOrder(arbol, resultado);
+    assert(resultado == vector<int>({4,5,2,6,7,3,1}));
+    resultado.clear();
+
+    cout << "Todos los test pasaron correctamente" << endl;
+
+}
+
 
 int main(){
     NodoArbol* arbol = nullptr;
+
     insertar(arbol, new NodoArbol{1, nullptr, nullptr});
     insertar(arbol, new NodoArbol{2, nullptr, nullptr});
     insertar(arbol, new NodoArbol{3, nullptr, nullptr});
@@ -96,5 +141,8 @@ int main(){
     insertar(arbol, new NodoArbol{6, nullptr, nullptr});
     insertar(arbol, new NodoArbol{7, nullptr, nullptr});
     mostrarArbol(arbol);
+
+    testFunciones(arbol);
+    
     return 0;
 }
