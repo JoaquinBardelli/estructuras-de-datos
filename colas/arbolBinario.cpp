@@ -3,11 +3,6 @@
 #include <cassert>
 using namespace std;
 
-//Crear primero struct NodoArbol HECHO
-//Despues crear struct Cola HECHO
-//En dequeue de Cola devolver de tipo NodoArbol* HECHO
-//Armar la funcion insertar y mostrarArbol afuera de todo struct
-//
 
 
 struct NodoArbol {

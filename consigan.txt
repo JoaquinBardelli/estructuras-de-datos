@@ -1,0 +1,125 @@
+SEMANA 4 — DÍA 3 Y DÍA 4 (versión sin conexión)
+==================================================
+
+Ojo antes de arrancar: las consignas originales de estos dos días pedían leer
+cppreference.com y resolver problemas en leetcode.com — ninguna de las dos
+la vas a poder abrir sin internet. Así que acá te dejo todo autocontenido:
+la teoría explicada directo, y los enunciados de los problemas escritos
+enteros, sin necesitar ningún link.
+
+
+DÍA 3 — Hashing (teoría)
+--------------------------------------------------
+
+Un hash map (en C++ es la clase `unordered_map`) guarda pares clave-valor
+y te deja buscar por clave en tiempo O(1) — constante, sin importar cuántos
+elementos tenga adentro.
+
+¿Por qué es O(1)? Porque no compara nada. Una función matemática (la
+"función de hash") agarra tu clave y la convierte directamente en un
+índice de un array interno. Guardás el valor ahí. Cuando buscás esa misma
+clave de nuevo, la función de hash te da el mismo índice, así que vas
+directo — sin recorrer nada, sin comparar de a uno como en un array o
+un BST.
+
+Compará con lo que ya programaste esta semana:
+  - Array sin ordenar: buscar es O(n), tenés que mirar uno por uno.
+  - BST: buscar es O(log n), descartás la mitad en cada paso.
+  - Hash map: buscar es O(1), vas directo al lugar.
+
+EL PROBLEMA DE LAS COLISIONES:
+Dos claves distintas pueden, por mala suerte, generar el mismo índice
+con la función de hash. A esto se le llama colisión. La forma más común
+de resolverlo se llama "encadenamiento" (chaining): en vez de que cada
+posición del array guarde un solo valor, cada posición guarda una lista
+de todos los valores que cayeron ahí. Si hay una colisión, el valor nuevo
+se agrega a esa lista en vez de pisar al anterior.
+
+PREGUNTA PARA VOS (contestala en papel o en un txt, y mandámela cuando
+tengas conexión de nuevo):
+
+  ¿Por qué la búsqueda en un hash map es O(1) "en el caso típico" pero
+  no SIEMPRE? ¿Qué situación podría hacer que una búsqueda tarde más de
+  lo esperado?
+
+  Pista: pensá qué pasa si, por una función de hash mal elegida o mala
+  suerte, un montón de claves distintas terminan generando siempre el
+  mismo índice. ¿Qué le pasa a esa "lista" de la que hablamos arriba?
+
+
+DÍA 4 — Practicar hashing con 3 problemas (sin necesitar LeetCode)
+--------------------------------------------------
+
+Como no vas a tener conexión para abrir LeetCode, te dejo acá los tres
+enunciados completos. La idea es la misma de siempre: programalos vos,
+con tu propio main() y tus propios `assert` de prueba (como venís
+haciendo en todos los ejercicios del plan) — no hace falta subirlos a
+ningún lado para validarlos. Cuando tengas internet de nuevo, si querés,
+los podés pegar en leetcode.com para chequear contra sus propios tests,
+pero no es obligatorio.
+
+Para los tres, usá `unordered_map` — el objetivo de hoy es que sientas
+en la práctica cómo bajan de complejidad respecto a cuando los hiciste
+con fuerza bruta en la Semana 1.
+
+  #include <unordered_map>
+
+---
+
+PROBLEMA 1 — Two Sum
+
+Te dan un array de enteros y un número objetivo. Tenés que devolver los
+índices de dos elementos del array cuya suma sea exactamente ese
+objetivo. Podés asumir que existe exactamente una solución, y no podés
+usar el mismo elemento dos veces.
+
+Ejemplo: array = [2, 7, 11, 15], objetivo = 9
+Resultado esperado: índices 0 y 1 (porque 2 + 7 = 9)
+
+Con fuerza bruta (como lo hiciste en la Semana 1) esto es O(n²): por
+cada elemento, recorrés todos los demás buscando el complemento.
+
+Con unordered_map podés hacerlo en O(n): recorrés el array una sola vez,
+y en cada paso te preguntás "¿ya vi antes el número que me falta para
+llegar al objetivo?" — guardando cada número visto (y su índice) en el
+mapa a medida que avanzás.
+
+---
+
+PROBLEMA 2 — Contains Duplicate
+
+Te dan un array de enteros. Tenés que devolver true si algún valor
+aparece más de una vez en el array, y false si todos los valores son
+distintos.
+
+Ejemplo: [1, 2, 3, 1] → true (el 1 se repite)
+Ejemplo: [1, 2, 3, 4] → false
+
+Este es el mismo problema que ya resolviste en la Semana 1 (te acordás
+del TLE con fuerza bruta, y que lo terminaste resolviendo con sort()
+en O(n log n)). Hoy la consigna es resolverlo con unordered_map en O(n):
+recorrés el array una vez, y para cada valor te preguntás "¿ya está en
+el mapa?" — si está, es un duplicado; si no, lo agregás y seguís.
+
+---
+
+PROBLEMA 3 — Valid Anagram
+
+Te dan dos strings. Tenés que determinar si el segundo es un anagrama
+del primero — es decir, si tiene exactamente las mismas letras, en las
+mismas cantidades, pero en cualquier orden.
+
+Ejemplo: "anagram" y "nagaram" → true
+Ejemplo: "rat" y "car" → false
+
+Con un unordered_map<char, int> podés contar cuántas veces aparece cada
+letra en el primer string (sumando 1 por cada letra que ves), y después
+recorrer el segundo string restando 1 por cada letra que encontrás. Si
+al final todos los contadores dan exactamente 0, y ambos strings tienen
+la misma longitud, son anagramas.
+
+
+---
+Cuando tengas conexión de nuevo, mandame:
+  1. Tu respuesta a la pregunta de colisiones del Día 3.
+  2. El código de los 3 problemas del Día 4, con sus assert.
