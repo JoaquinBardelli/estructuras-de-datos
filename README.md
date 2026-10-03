@@ -40,7 +40,7 @@ Se midió el tiempo promedio de búsqueda en tres estructuras cargadas con la mi
 
 ## Lo que buscaba reforzar este proyecto
 
-- Análisis de complejidad temporal (Big-O) de código propio, no solo de ejercicios de ejemplo
-- Manejo manual de memoria en C++ (`new`/`delete`), y los bugs típicos que trae: memory leaks, dangling pointers, use-after-free
-- Testing con `assert`, cubriendo casos límite (listas vacías, un solo elemento, valores repetidos, valores ausentes)
-- La diferencia entre una estructura "funciona" y una estructura "funciona, está bien testeada y además es eficiente"
+- Análisis de complejidad temporal (Big-O) de código propio, no solo de ejercicios de ejemplo.
+- Manejo manual de memoria en C++ (`new`/`delete`), y los bugs típicos que trae: memory leaks, dangling pointers, use-after-free.
+- Testing con `assert`, cubriendo casos límite (listas vacías, un solo elemento, valores repetidos, valores ausentes).
+- La diferencia entre una estructura "funciona" y una estructura "funciona, está bien testeada y además es eficiente".
