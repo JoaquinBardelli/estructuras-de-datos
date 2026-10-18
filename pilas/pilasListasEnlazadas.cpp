@@ -50,6 +50,7 @@ bool parentesisBalanceados(string cadena){
         }else if (c == ')' || c == ']' || c == '}'){
             if(head == nullptr){
                 valido = false;
+                return false;
             }
             char abre = head -> valor;
             bool coincide = (c == ')' && abre == '(') || (c == ']' && abre == '[') || (c == '}' && abre == '{');

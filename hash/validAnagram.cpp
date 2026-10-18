@@ -30,7 +30,7 @@ public:
         for(char c : s){
             cantAparicionesS[c] ++;
         }
-        for(char c : s){
+        for(char c : t){
             cantAparicionesS[c] --;
             if(cantAparicionesS[c] < 0){
                 return false;

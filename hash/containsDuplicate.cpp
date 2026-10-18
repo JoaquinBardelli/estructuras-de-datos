@@ -2,6 +2,7 @@
 #include <vector>
 #include <cassert>
 #include <unordered_map>
+#include <unordered_set>
 using namespace std;
 
 
@@ -13,7 +14,7 @@ public:
             if(vistos.find(nums[i]) != vistos.end()){
                 return true;
             }
-            vistos[nums[i]] = i;
+            vistos.insert(nums[i]);
         }
         return false;
     }
