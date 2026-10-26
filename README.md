@@ -64,6 +64,19 @@ estructuras-de-datos/
 
 Los tres bajan la solución de fuerza bruta O(n²) a O(n). Están escritos en formato LeetCode (`class Solution`), así que no tienen `main()` propio.
 
+### Resumen de complejidades
+
+Complejidad temporal de las operaciones principales, tal como están implementadas en este repo:
+
+| Estructura | Insertar | Buscar | Eliminar | Notas |
+|---|---|---|---|---|
+| Lista enlazada | O(1) al inicio | O(n) | O(n) por valor | — |
+| Pila (array / lista) | O(1) `push` | O(1) `top` | O(1) `pop` | La versión con array tiene capacidad fija. |
+| Cola (array / lista) | O(1) `enqueue` | O(1) `peek` | O(1) `dequeue` | `size()` es O(n) en la versión con lista, porque la recorre. |
+| Árbol binario (por niveles) | O(n) | — | — | La inserción recorre por niveles hasta encontrar un lugar libre. Los recorridos son O(n). |
+| BST | O(log n) promedio | O(log n) promedio | — | Si los datos llegan ordenados, el árbol se degenera y pasa a ser O(n). |
+| Hash (`unordered_map` / `unordered_set`) | O(1) promedio | O(1) promedio | O(1) promedio | — |
+
 ## Cómo compilar y ejecutar
 
 Se necesita un compilador con soporte para C++17 (por ejemplo `g++` de MinGW/MSYS2 en Windows, o `g++`/`clang++` en Linux/macOS). Cada archivo con `main()` es un programa independiente:
@@ -72,6 +85,8 @@ Se necesita un compilador con soporte para C++17 (por ejemplo `g++` de MinGW/MSY
 g++ -std=c++17 -Wall listasEnlazadas.cpp -o programa
 ./programa
 ```
+
+En Windows (PowerShell o cmd) el ejecutable se genera como `programa.exe` y se corre con `.\programa.exe`.
 
 Los archivos de `hash/` solo se pueden chequear sintácticamente, porque no tienen `main()`:
 
